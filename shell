@@ -1,0 +1,100 @@
+ cat A.sh >> ~/Desktop/shell
+
+
+for ((i=1;i<=99;i=i+2))
+do
+    echo $i
+    done
+    
+
+read name
+echo Welcome $name
+
+
+
+for i in {1..50}
+do
+    echo $i
+done
+
+read x;
+read y;
+
+＃整数运算$(( ));
+echo "$(($x+$y))";
+echo "$(($x-$y))";
+echo "$(($x*$y))";
+echo "$(($x/$y))";
+
+read first
+read second
+
+if [ $first -eq $second ]
+then
+	echo "X is equal to Y"
+elif [ $first -gt $second ]
+then
+	echo "X is greater than Y"
+else
+	echo "X is lesser than Y"
+fi
+
+read a;
+if [ $a=="y"] || [ $a=="Y"]
+then
+    echo "YES"
+else
+    echo "NO"
+fi
+
+#表达式计算，保留三位小数，四舍五入
+read x
+printf "%.3f\n" $(echo "$x" | bc -l)
+
+
+＃求平均值
+read n
+sum=0
+for ((i=0;i<$n;i++))
+do
+    read x
+    sum=$(($sum +$x))
+done
+sum=$sum/$n
+printf "%.3f\n" $(echo "$sum" | bc -l)
+＃鹦鹉学舌
+
+tot=0
+while read LINE
+do
+    array[$tot]=$LINE
+    tot=$(($tot+1))
+done
+
+#不换行输出
+for((i=0;i<$tot;i++))
+do
+    echo -n "${array[$i]} "
+done
+
+
+while read line
+do
+array=("${array[@]}" "$line")
+done
+
+
+#输出不包含ａ和Ａ的字符串
+#找到包含ａ　Ａ的替换成空串
+array=($(cat))
+echo ${array[*]/*[a,A]*/}
+
+while read line
+do
+    array=("${array[@]}" "$line")
+done
+echo ${array[3]}
+
+＃大写的首字符替换成'.'
+array=($(cat))
+echo ${array[@]/[A-Z]/.}
